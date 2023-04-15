@@ -1,7 +1,7 @@
 //add items to list
 //remove and clear items
 //clear ui state
-//!filter items
+//filter items
 //!add item to local storage
 //!display items from local storage
 //!remove items from local storage
@@ -75,6 +75,24 @@ function clearList () {
   checkUI();
 };
 
+
+function filterList(e) {
+  const filterText = e.target.value.toLowerCase();
+  const items = itemList.querySelectorAll('li');
+  
+  items.forEach(item => {
+    const itemName = item.firstChild.textContent.toLowerCase();
+    if (itemName.indexOf(filterText) != -1) {
+      item.style.display = 'flex';
+      console.log('true')
+    } else {
+      item.style.display = 'none';
+      console.log('false')
+    };
+  });
+};
+
+
 function checkUI() {
   const items = itemList.querySelectorAll('li');
   if (items.length === 0) {
@@ -90,5 +108,6 @@ function checkUI() {
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearList);
+itemFilter.addEventListener('input', filterList);
 
 checkUI();
